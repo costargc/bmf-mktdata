@@ -3,9 +3,9 @@ BMF (Brazil Exchange) publish forecast data for many key market reference indica
 
 Data=<DD/MM/YYYY>
 
-slcTaxa='<AAA>'
+slcTaxa=\<AAA>
 
-Where '<AAA>' can be:
+Where \<AAA> can be:
 
 | slcTaxa  | name |
 | ------------- | ------------- |
