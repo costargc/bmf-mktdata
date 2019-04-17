@@ -31,7 +31,8 @@ Where \<AAA> can be:
 | TP| TR x pré |
 | TR| DI x TR |
 
-TO DO:
+# TO DO:
+
 This initial version is not efficient but it do load all the data from PRE curve.
 
 1. We need to format the data to dividi it in columns (0 = date / 1 = rate , 2 ...)
