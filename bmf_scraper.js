@@ -19,7 +19,8 @@ const searchbmf = async (Data, slcTaxa) => {
     console.log(arr[arr.length-1]);
 }
 
-searchbmf('08/06/2018', 'PRE');
+searchbmf('08/06/2018', 'PRE'); // dateFormat = DD/MM/YYYY
+
 
 
 // | slcTaxa  | name |
