@@ -2,13 +2,14 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 
 const searchbmf = async (Data, slcTaxa) => {
+    var arr = [];
     const url = 'http://www2.bmf.com.br/pages/portal/bmfbovespa/boletim1/TxRef1.asp?Data=' + Data + "&slcTaxa=" + slcTaxa;
     const response = await fetch(url);
     const body = await response.text();
-    const $ = cheerio.load(body);
 
-    linebreak = $('#tb_principal1').find('tr').replaceWith('\t');
-    var arr = [];
+    const $ = cheerio.load(body);
+    linebreak = $('#tb_principal1').find('tr');
+
     linebreak.each(function (i, element) {
         const $element = $(element);
         const $data = $element.find('td').text().replace(/,/g, '.').replace('\n', '\t').replace(' \n', '\t');
@@ -20,8 +21,6 @@ const searchbmf = async (Data, slcTaxa) => {
 }
 
 searchbmf('08/06/2018', 'PRE'); // dateFormat = DD/MM/YYYY
-
-
 
 // | slcTaxa  | name |
 // | ------------- | ------------- |
