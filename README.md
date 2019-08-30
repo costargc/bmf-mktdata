@@ -35,7 +35,7 @@ Where \<AAA> can be:
 
 This initial version is not efficient but it do load all the data from PRE curve.
 
-1. We need to format the data to dividi it in columns (0 = date / 1 = rate , 2 ...)
+1. We need to format the data to divide it in columns (0 = date / 1 = rate , 2 ...)
 
 2. We need to explore more data sets (there are other forms of datas than 252 and 360. ex.: índice / Preço / Taxa... we need to find a way to account for those.
 

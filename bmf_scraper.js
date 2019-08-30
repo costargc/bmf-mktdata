@@ -1,26 +1,93 @@
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 
-const searchbmf = async (Data, slcTaxa) => {
-    var arr = [];
+configObj = [
+    { slcTaxa: "ACC", description: "Ajuste cupom", fields: ["day", "value360"] },
+    { slcTaxa: "APR", description: "Ajuste pré", fields: ["day", "value252", "value360"] },
+    { slcTaxa: "BRP", description: "IBrX-50", fields: ["day", "index"] },
+    { slcTaxa: "DCO", description: "Cupom Cambial OC1", fields: ["day", "value360"] },
+    { slcTaxa: "DIC", description: "DI x IPCA", fields: ["day", "value252"] },
+    { slcTaxa: "DIM", description: "DI x IGP-M", fields: ["day", "value252"] },
+    { slcTaxa: "DOC", description: "Cupom limpo", fields: ["day", "value360"] },
+    { slcTaxa: "DOL", description: "DI x dólar", fields: ["day", "value360"] },
+    { slcTaxa: "DP", description: "Dólar x pré", fields: ["day", "value252", "value360"] },
+    { slcTaxa: "EUC", description: "DI x euro", fields: ["day", "value360"] },
+    { slcTaxa: "EUR", description: "Real x euro", fields: ["day", "price"] },
+    { slcTaxa: "INP", description: "Ibovespa", fields: ["day", "index"] },
+    { slcTaxa: "JPY", description: "Real x iene", fields: ["day", "price"] },
+    { slcTaxa: "LIB", description: "Libor", fields: ["day", "value360"] },
+    { slcTaxa: "PRE", description: "DI x pré", fields: ["day", "value252", "value360"] },
+    { slcTaxa: "PTX", description: "Real x dólar", fields: ["day", "price"] },
+    { slcTaxa: "SDE", description: "Spread Libor Euro x Dólar", fields: ["day", "taxa"] },
+    { slcTaxa: "SLP", description: "Selic x pré", fields: ["day", "value252"] },
+    { slcTaxa: "TFP", description: "TBF x pré", fields: ["day", "value252", "value360"] },
+    { slcTaxa: "TP", description: "TR x pré", fields: ["day", "value252", "value360"] },
+    { slcTaxa: "TR", description: "DI x TR", fields: ["day", "value252", "value360"] },
+]
+
+const searchbmf = async (Data, slcTaxa, config) => {
     const url = 'http://www2.bmf.com.br/pages/portal/bmfbovespa/boletim1/TxRef1.asp?Data=' + Data + "&slcTaxa=" + slcTaxa;
+    // console.log(url);
     const response = await fetch(url);
     const body = await response.text();
-
     const $ = cheerio.load(body);
-    linebreak = $('#tb_principal1').find('tr');
 
-    linebreak.each(function (i, element) {
-        const $element = $(element);
-        const $data = $element.find('td').text().replace(/,/g, '.').replace('\n', '\t').replace(' \n', '\t');
-        arr[i] = $data;
-    })
+    for (i = 0; i < config.length; i++) {
+        if (configObj[i].slcTaxa == slcTaxa) {
+            Main_slcTaxa = configObj[i].slcTaxa;
+            Main_description = configObj[i].description;
+            Main_fields = configObj[i].fields;
+        }
+    }
 
-    console.log(arr.length);
-    console.log(arr[arr.length-1]);
-}
+    // console.log(Main_fields.length);
 
-searchbmf('08/06/2018', 'PRE'); // dateFormat = DD/MM/YYYY
+    var results = [];
+    var results_format = [];
+    $("td.tabelaConteudo1").each(function (i, element) {
+
+        var value = $(element).text().replace(",", ".") * 1;
+        if (typeof (value) == "number") {
+            results.push(value);
+        }
+
+    });
+
+    $("td.tabelaConteudo2").each(function (i, element) {
+
+        var value = $(element).text().replace(",", ".") * 1;
+        if (typeof (value) == "number") {
+            results.push(value)
+        }
+
+    });
+
+    var count = 0;
+    var array = [];
+    for (var i = 0; i < results.length; i = i + Main_fields.length) {
+        // create array
+        array = [];
+        for (var j = 0; j < Main_fields.length; j++) {
+            array[Main_fields[j]] = results[i+j];
+        }
+
+        results_format.push(array);
+        count++;
+    }
+
+    // sorting data
+    results_format.sort((a, b) => parseFloat(a.day) - parseFloat(b.day));
+
+    return results_format;
+};
+
+
+
+// dateFormat = DD/MM/YYYY
+searchbmf('28/08/2019', 'PTX', configObj).then(function (data) {
+    console.log(data);
+});
+
 
 // | slcTaxa  | name |
 // | ------------- | ------------- |
@@ -45,3 +112,4 @@ searchbmf('08/06/2018', 'PRE'); // dateFormat = DD/MM/YYYY
 // | TFP| TBF x pré |
 // | TP| TR x pré |
 // | TR| DI x TR |
+
