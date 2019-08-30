@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/costargc/BMF-mktdata-html-scraper#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
     "lodash": "^4.17.15",
     "node-fetch": "^2.3.0"
