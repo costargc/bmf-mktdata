@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 
 
-const ambima_isHoliday = async (CheckDate) => {
+exports.ambima_isHoliday = async (CheckDate) => {
 
     MyDate = CheckDate.split('/');
     CheckDay = MyDate[0] * 1;
@@ -75,6 +75,6 @@ const ambima_isHoliday = async (CheckDate) => {
 
 // dateFormat = DD/MM/YYYY
 // ambimaholiday('25/08/2019');
-ambima_isHoliday('27/08/2079').then(function (data) {
-    console.log(data);
-});
+// ambima_isHoliday('27/08/2079').then(function (data) {
+//     console.log(data);
+// });

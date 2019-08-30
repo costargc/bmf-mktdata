@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RPS game</title>
+    <link rel="stylesheet" href="/home/home.css">
+
+
+    <!-- jquery -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Bootstrap -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
+    <!-- Chart JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+
+
+</head>
+
+<body>
+    <header>
+        <h1>
+            <hr>BMF Bovespa - Brazil MarketData Scraping</h1>
+    </header>
+    <hr>
+    <br> </br>
+
+    </head>
+
+    <form>
+        <div class="row">
+            <div class="Column">
+                Date (dd/mm/yy):
+            </div>
+            <div class="Column">
+                <input type="text" id="datepicker" autocomplete="off" style="width: 100px">
+            </div>
+        </div>
+
+        <br></br>
+
+        <div class="row">
+            <div class="Column">
+                slcTaxa:
+            </div>
+            <div class="Column">
+                <select class="form-control" id="slcTaxa" style="width: 100px"></select>
+            </div>
+        </div>
+
+        <br></br>
+
+        <!-- Date (dd/mm/yy): <input type="text" id="datepicker" autocomplete="off" style="width: 100px">
+        <br> </br>
+        slcTaxa:
+        <select class="form-control" id="slcTaxa" style="width: 100px">
+
+        </select>
+
+
+
+        <br> </br> -->
+        <button id="runapp" style="padding:5px;">run this app</button>
+    </form>
+
+
+    <div id='insidePlot'></div>
+    <!-- <div class="card-body" id="graph-div">
+        <canvas id="Emotioncanvas" style="display: block; width: 500px; height: 400px;" 
+            class="chartjs-render-monitor"></canvas>
+    </div> -->
+
+
+
+    <script type="text/javascript" src="/home/home.js"></script>
+</body>
+
+</html>

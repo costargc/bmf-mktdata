@@ -1,26 +1,26 @@
 {
-  "name": "BMF-mktdata-html-scraper",
+  "name": "bmf-mktdata",
   "version": "1.0.0",
   "description": "BMF (Brazil Exchange) publish forecast data for many key market reference indicators for Brazil Market. The information is structured under the website: \"http://www2.bmf.com.br/pages/portal/bmfbovespa/boletim1/TxRef1.asp?\" that receives two key datas:",
-  "main": "bmf_scraper.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/costargc/BMF-mktdata-html-scraper.git"
+    "url": "git+https://github.com/costargc/bmf-mktdata.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Rodrigo Costa",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/costargc/BMF-mktdata-html-scraper/issues"
+    "url": "https://github.com/costargc/bmf-mktdata/issues"
   },
-  "homepage": "https://github.com/costargc/BMF-mktdata-html-scraper#readme",
+  "homepage": "https://github.com/costargc/bmf-mktdata#readme",
   "dependencies": {
-    "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
-    "lodash": "^4.17.15",
-    "node-fetch": "^2.3.0"
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "path": "^0.12.7"
   }
 }

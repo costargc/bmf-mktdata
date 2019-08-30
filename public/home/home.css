@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: boder-box;
+}
+
+body {
+    background: white;
+    padding: 40px;
+    width: 800px;
+}
+
+@media screen and (max-width: 400px){
+    body{
+        background: white;
+        padding: 40px;
+        width: 800px;
+        min-height:1500px;
+  }
+}
+
+header > h1 {
+    text-align: left;
+   /* font-family: sans-serif; */
+}
+
+button{
+    width: 250px;
+    height: 35px;
+}
+
+.Row
+    {
+       display:table-row;
+       width:auto;
+    }
+
+.Column
+    {
+        float:left;/*fix for  buggy browsers*/
+        display:table-column;
+        width:150px;
+    }
+
