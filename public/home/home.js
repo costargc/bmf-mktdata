@@ -50,16 +50,23 @@ $("#runapp").on("click", function (event) {
         if (document.getElementById('myChart') != null) {
             document.getElementById('myChart').remove();
         }
-        
+
         $('#loadingscreen').css('display', 'flex');
         // console.log($("#datepicker").datepicker({ dateFormat: "dd/mm/yy" }).val());
         // console.log($("#slcTaxa").val());
 
-
+        // clear table and clear plot
         request = {
             date: $("#datepicker").datepicker({ dateFormat: "dd/mm/yy" }).val(),
             slcTaxa: $("#slcTaxa").val()
         };
+
+
+
+        if (document.getElementById('myTable') != null) {
+            document.getElementById('myTable').remove();
+        }
+        // clear table and clear plot - END
 
         // api route get goes here!!!
         // $('#Emotioncanvas').destroy();
@@ -129,6 +136,31 @@ $("#runapp").on("click", function (event) {
                     }
                 }
             });//end plot
+
+            // start table
+
+            myTable = document.createElement("table");
+            myTable.setAttribute("id", "myTable");
+            // myTable.setAttribute("style", "width: 700px; height: 500px");
+            document.getElementById("insideTable").appendChild(myTable);
+            // document.getElementById('insidePlot').setAttribute("style", "width: 700px; height: 500px");
+
+            var table_data = '';
+            table_data += table_data + '<tr>';
+            table_data += '<th>' + "Time (days)" + '</th>';
+            table_data += '<th>' + request.slcTaxa + " value" + '</th>';
+            table_data += '</tr>';
+
+            for (i = 0; i < response.time.length; i++) {
+                table_data += '<tr>';
+                table_data += '<td>' + response.time[i] + '</td>';
+                table_data += '<td>' + response.value[i] + '</td>';
+                table_data += '</tr>';
+            }
+
+            $('#myTable').append(table_data);
+            console.log(table_data);
+            // end table
 
         });
 
