@@ -1,4 +1,17 @@
 $(document).ready(function () {
+
+    // myPlot = document.createElement("canvas");
+    // myPlot.setAttribute("id", "myChart");
+    // myPlot.setAttribute("style", "width: 700px; height: 500px");
+    // document.getElementById("insidePlot").appendChild(myPlot);
+    // document.getElementById('insidePlot').setAttribute("style", "width: 700px; height: 500px");
+
+
+    //start plot
+    // var ctx = document.getElementById('myChart').getContext('2d');
+
+
+
     $("#datepicker").datepicker({ dateFormat: "dd/mm/yy" });
 
 
@@ -13,6 +26,8 @@ $(document).ready(function () {
             $('#slcTaxa').append('<option>' + optionsselect[i] + '</option>');
         }
     }
+
+
 
 });
 
@@ -31,8 +46,15 @@ $("#runapp").on("click", function (event) {
     }
     else {
         event.preventDefault();
+
+        if (document.getElementById('myChart') != null) {
+            document.getElementById('myChart').remove();
+        }
+        
+        $('#loadingscreen').css('display', 'flex');
         // console.log($("#datepicker").datepicker({ dateFormat: "dd/mm/yy" }).val());
         // console.log($("#slcTaxa").val());
+
 
         request = {
             date: $("#datepicker").datepicker({ dateFormat: "dd/mm/yy" }).val(),
@@ -47,19 +69,15 @@ $("#runapp").on("click", function (event) {
         // $('#graph-div').append('<canvas id="Emotioncanvas" style="display: block; width: 500px; height: 400px;" class="chartjs-render-monitor"></canvas>');
 
         $.post("/api/BMFsearch", request).then(function (response) {
-
+            $('#loadingscreen').css('display', 'none');
             console.log(response);
-
-            if (document.getElementById('myChart') != null) {
-                document.getElementById('myChart').remove();
-            }
 
             myPlot = document.createElement("canvas");
             myPlot.setAttribute("id", "myChart");
             myPlot.setAttribute("style", "width: 700px; height: 500px");
             document.getElementById("insidePlot").appendChild(myPlot);
             document.getElementById('insidePlot').setAttribute("style", "width: 700px; height: 500px");
-            
+
 
             //start plot
             var ctx = document.getElementById('myChart').getContext('2d');
